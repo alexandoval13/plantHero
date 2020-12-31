@@ -1,0 +1,30 @@
+.plant-list-comp {
+  margin: 0 auto;
+  max-width: 800px;
+
+  /* border: 1px solid gold; */
+}
+
+/* MODE SELECT BAR */
+.mode-bar {
+  display: flex;
+  justify-content: flex-start;
+  flex-direction: row;
+  width: 100%;
+}
+
+.mode-select {
+  border-bottom: 1px solid black;
+  width: fit-content;
+  margin-left: 6px;
+}
+
+.mode-select:hover {
+  cursor: pointer;
+}
+
+/* PLANT BOX */
+.plant-box {
+  max-width: 100%;
+  /* border: 1px solid black; */
+}

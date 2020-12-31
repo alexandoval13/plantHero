@@ -1,0 +1,98 @@
+.plants-container {
+  max-width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  align-content: space-around;
+}
+
+.need-water {
+  max-width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  align-content: space-around;
+}
+
+.gtg {
+  max-width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  align-content: space-around;
+}
+
+.planter {
+  border-radius: 6px;
+  width: 144px;
+  height: 144px;
+  margin: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.plant-image {
+  object-fit: cover;
+  width: 100%;
+  min-height: 100%;
+  border-radius: 4px;
+}
+
+.plant-image:hover {
+  -webkit-filter: brightness(70%);
+  /* -webkit-transition: all 1s ease;
+  -moz-transition: all 1s ease;
+  -o-transition: all 1s ease;
+  -ms-transition: all 1s ease;
+  transition: all 1s ease; */
+  cursor: pointer;
+}
+
+
+/* ADD PLANT BOX BUTTON */
+.btn-box {
+  width: 144px;
+  height: 144px;
+}
+
+.btn {
+  padding: 16px;
+  height: 112px;
+  width: 112px;
+}
+
+.add-plant-btn {
+  height: 100%;
+  width: 100%;
+  padding: 8px;
+  border: none;
+  border-radius: 6px;
+  background-color: #95b7958a;
+  color: white;
+}
+
+.add-plant-btn:hover {
+  /* -webkit-filter: brightness(85%); */
+  background-color: #95b795ef;
+  /* -webkit-transition: all 1s ease;
+  -moz-transition: all 1s ease;
+  -o-transition: all 1s ease;
+  -ms-transition: all 1s ease;
+  transition: all 1s ease; */
+  cursor: pointer;
+}
+
+.add-plant-btn:hover span {
+  display: none;
+}
+
+.add-plant-btn:hover:before {
+  content: "Add a Plant";
+  /* -webkit-transition: all 1s ease;
+  -moz-transition: all 1s ease;
+  -o-transition: all 1s ease;
+  -ms-transition: all 1s ease;
+  transition: all 1s ease; */
+}

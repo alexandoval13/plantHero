@@ -1,0 +1,15 @@
+.confirmation-container {
+  margin: 0 auto;
+  max-width: 800px;
+  text-align: center;
+
+  /* border: 1px solid gold; */
+}
+
+.confirmation-txt {
+  text-align: center;
+}
+
+.confirmation-subtxt {
+  color: blue;
+}
