@@ -1,22 +1,13 @@
-// const app = require('./app.js');
-
-
-// app.listen(port, () => {
-  //   console.log(`Connected to server at port ${port}`)
-  // });
-
-require('dotenv').config();
+// require('dotenv').config();
 const express = require('express');
+const app = express();
+const bodyParser = require('body-parser');
+
 const cloudinary = require('cloudinary').v2;
 
 
-
-const app = express();
-
-const port = process.env.PORT || 3000;
-const bodyParser = require('body-parser');
-
 app.use(express.static(__dirname + '/../client/dist'));
+app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(express.urlencoded({extended: true}));
 
@@ -47,8 +38,4 @@ app.post('/upload-image', (req, res) => {
   });
 });
 
-
-
-app.listen(port, () => {
-  console.log(`Connected to server at port ${port}`);
-})
+module.exports = app;
