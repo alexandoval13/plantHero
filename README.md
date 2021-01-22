@@ -21,6 +21,8 @@ npm start
 npm run build
 ```
 
+> Set up .env file by following instructions in .env_sample
+
 <!-- For production:
 
 ```sh
