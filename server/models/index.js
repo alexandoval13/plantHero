@@ -1,1 +1,1 @@
-module.exports = require('./cloudinary_mod.js');
+module.exports = require('./plants_mod.js');

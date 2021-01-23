@@ -9,7 +9,6 @@ app.use(bodyParser.json());
 app.use(express.urlencoded({extended: true}));
 
 
-// app.post('/upload-image', controller.uploadImage);
+app.post('/test', controller.testController);
 
 module.exports = app;
-

@@ -7,8 +7,9 @@ CREATE DATABASE planthero;
 
 CREATE TABLE IF NOT EXISTS users (
   id SERIAL PRIMARY KEY,
-  user_name VARCHAR(30) NOT NULL,
-  user_pw VARCHAR(30) NOT NULL
+  user_id VARCHAR(30) NOT NULL,
+  user_pw VARCHAR(30) NOT NULL,
+  full_name VARCHAR(45)
 );
 
 CREATE TABLE IF NOT EXISTS userplants (
