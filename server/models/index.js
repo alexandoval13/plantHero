@@ -1,0 +1,1 @@
+module.exports = require('./cloudinary_mod.js');
