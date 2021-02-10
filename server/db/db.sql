@@ -44,6 +44,7 @@ CREATE TABLE IF NOT EXISTS usercategories (
   id SERIAL PRIMARY KEY,
   category_value VARCHAR(30),
   category_label VARCHAR(30),
+  plants TEXT[],
   user_id INT NOT NULL REFERENCES users(id)
 );
 
