@@ -25,40 +25,40 @@ const users = 13;
 
 ///////////////
 //// USERS ////
-// const usersCSVDest = path.join(__dirname, 'usersCSV.csv');
-// deleteFileIfExists(usersCSVDest);
-// const usersCSV = fs.createWriteStream(usersCSVDest);
+const usersCSVDest = path.join(__dirname, 'usersCSV.csv');
+deleteFileIfExists(usersCSVDest);
+const usersCSV = fs.createWriteStream(usersCSVDest);
 
-// var userHeader = 'user_id,user_pw,full_name\n';
-// writeCSVHeader(usersCSV, userHeader, () => {
-//   console.log('ending header write');
-//   usersCSV.end();
-// });
+var userHeader = 'user_id,user_pw,full_name\n';
+writeCSVHeader(usersCSV, userHeader, () => {
+  console.log('ending header write');
+  usersCSV.end();
+});
 
-// console.time();
-// writeCSV(usersCSV, writeUser, users, () => {
-//   console.log('ending users data write');
-//   usersCSV.end();
-// });
-// console.timeEnd();
+console.time();
+writeCSV(usersCSV, writeUser, users, () => {
+  console.log('ending users data write');
+  usersCSV.end();
+});
+console.timeEnd();
 
 ////////////////////
 //// CATEGORIES ////
 
-// const categoriesCSVDest = path.join(__dirname, 'categoriesCSV.csv');
-// deleteFileIfExists(categoriesCSVDest);
-// const categoriesCSV = fs.createWriteStream(categoriesCSVDest);
+const categoriesCSVDest = path.join(__dirname, 'categoriesCSV.csv');
+deleteFileIfExists(categoriesCSVDest);
+const categoriesCSV = fs.createWriteStream(categoriesCSVDest);
 
-// var categoriesHeader = 'category_value,category_label,user_id\n';
-// writeCSVHeader(categoriesCSV, categoriesHeader, () => {
-//   categoriesCSV.end();
-// });
+var categoriesHeader = 'category_value,category_label,user_id\n';
+writeCSVHeader(categoriesCSV, categoriesHeader, () => {
+  categoriesCSV.end();
+});
 
-// console.time();
-// writeCSV(categoriesCSV, writeUserCategories, users, () => {
-//   categoriesCSV.end();
-// });
-// console.timeEnd();
+console.time();
+writeCSV(categoriesCSV, writeUserCategories, users, () => {
+  categoriesCSV.end();
+});
+console.timeEnd();
 
 ////////////////
 //// PLANTS ////

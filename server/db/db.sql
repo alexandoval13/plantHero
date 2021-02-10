@@ -12,6 +12,12 @@ CREATE TABLE IF NOT EXISTS users (
   full_name VARCHAR(45)
 );
 
+COPY users (user_id,user_pw,full_name)
+FROM '/Users/alexandra/Hack-Reactor/SEI-hrr49/MVP/Rootie/server/db/csv/usersCSV.csv'
+DELIMITER ','
+CSV HEADER;
+
+
 CREATE TABLE IF NOT EXISTS userplants (
   id SERIAL PRIMARY KEY,
   plant_name VARCHAR(30) NOT NULL,
@@ -25,7 +31,14 @@ CREATE TABLE IF NOT EXISTS userplants (
   user_id INT NOT NULL REFERENCES users(id)
 );
 
+COPY userplants (plant_name,nickname,light,watering_times,watering_weeks,last_watered,humidity,photoURL,user_id)
+FROM '/Users/alexandra/Hack-Reactor/SEI-hrr49/MVP/Rootie/server/db/csv/plantsCSV.csv'
+DELIMITER ','
+CSV HEADER;
+
 CREATE INDEX ON userplants(user_id);
+
+
 
 CREATE TABLE IF NOT EXISTS usercategories (
   id SERIAL PRIMARY KEY,
@@ -33,6 +46,11 @@ CREATE TABLE IF NOT EXISTS usercategories (
   category_label VARCHAR(30),
   user_id INT NOT NULL REFERENCES users(id)
 );
+
+COPY usercategories (category_value,category_label,user_id)
+FROM '/Users/alexandra/Hack-Reactor/SEI-hrr49/MVP/Rootie/server/db/csv/categoriesCSV.csv'
+DELIMITER ','
+CSV HEADER;
 
 CREATE INDEX ON usercategories(user_id);
  -- NOTE can calculate "age" with AGE() function
