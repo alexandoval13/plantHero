@@ -8,7 +8,7 @@ const testController = () => {
       res.send('Error');
     } else {
       console.log('cool');
-      res.send('cool');
+      res.send(res);
     }
   });
 }

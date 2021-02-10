@@ -25,6 +25,8 @@ CREATE TABLE IF NOT EXISTS userplants (
   user_id INT NOT NULL REFERENCES users(id)
 );
 
+CREATE INDEX ON userplants(user_id);
+
 CREATE TABLE IF NOT EXISTS usercategories (
   id SERIAL PRIMARY KEY,
   category_value VARCHAR(30),
@@ -32,4 +34,5 @@ CREATE TABLE IF NOT EXISTS usercategories (
   user_id INT NOT NULL REFERENCES users(id)
 );
 
+CREATE INDEX ON usercategories(user_id);
  -- NOTE can calculate "age" with AGE() function

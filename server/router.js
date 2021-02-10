@@ -9,6 +9,6 @@ app.use(bodyParser.json());
 app.use(express.urlencoded({extended: true}));
 
 
-app.post('/test', controller.testController);
+app.get('/test', controller.testController);
 
 module.exports = app;
