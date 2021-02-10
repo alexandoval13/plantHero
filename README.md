@@ -53,6 +53,18 @@ To create and connect to the Plant Hero database, run
 npm run db
 ```
 
+To populate the database with dummy data generated through a CSV file
+
+```sh
+npm run populateCSV
+```
+
+then
+
+```sh
+npm run db
+```
+
 <!-- ## CRUD API
 
 The following URL's should be prefixed with '/api/products/:id'
