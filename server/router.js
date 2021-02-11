@@ -8,8 +8,6 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(express.urlencoded({ extended: true }));
 
-// app.get('/test', controller.testController);
-
 app.get('/user-data/:id', (req, res) => {
   controller.getUserData(req.params.id, res);
 });
