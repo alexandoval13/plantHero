@@ -23,15 +23,17 @@ CREATE TABLE IF NOT EXISTS userplants (
   plant_name VARCHAR(30) NOT NULL,
   nickname VARCHAR(30),
   light VARCHAR(30),
+  exposure VARCHAR(30),
   watering_times INT NOT NULL,
   watering_weeks INT NOT NULL,
   last_watered DATE NOT NULL,
   humidity VARCHAR(10),
   photoURL VARCHAR,
+  added DATE NOT NULL,
   user_id INT NOT NULL REFERENCES users(id)
 );
 
-COPY userplants (plant_name,nickname,light,watering_times,watering_weeks,last_watered,humidity,photoURL,user_id)
+COPY userplants (plant_name,nickname,light,exposure,watering_times,watering_weeks,last_watered,humidity,photoURL,added,user_id)
 FROM '/Users/alexandra/Hack-Reactor/SEI-hrr49/MVP/Rootie/server/db/csv/plantsCSV.csv'
 DELIMITER ','
 CSV HEADER;

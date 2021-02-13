@@ -8,6 +8,20 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(express.urlencoded({ extended: true }));
 
+// app.get('/test', controller.testController);
+app.get('/:id', (req, res) => {
+  console.log(req.params['id']);
+  if (req.params['id'] >= 1 && req.params['id'] <= 13) {
+    res.status(200);
+    res.sendFile(
+      '/Users/alexandra/Hack-Reactor/SEI-hrr49/MVP/Rootie/client/dist/index.html'
+    );
+  } else {
+    res.status(404);
+    res.end();
+  }
+});
+
 app.get('/user-data/:id', (req, res) => {
   controller.getUserData(req.params.id, res);
 });

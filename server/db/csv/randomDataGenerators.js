@@ -54,19 +54,11 @@ const populateCategoriesArr = (total) => {
 const writeUser = (userId) => {
   userString = `${'user' + userId},plantword,${faker.name.findName()}\n`;
 
-  // for (var i = 0; i < total; i++) {
-  //   let user = {
-  //     user_id: 'user' + (i + 1),
-  //     user_pw: 'plantword',
-  //     full_name: faker.name.findName(),
-  //   };
-  // }
   console.log('USER:', userString);
   return userString;
 };
 
 // CREATE RANDOM CATEGORY OBJECT FOR ONE USER
-
 const writeUserCategories = (userId, x) => {
   var resultCats = '';
 
@@ -77,20 +69,12 @@ const writeUserCategories = (userId, x) => {
 
   randomCats.forEach((cat) => {
     resultCats += `${convertToValue(cat)},${cat},${userId}\n`;
-
-    // catObj = {
-    //   category_value: convertToValue(cat),
-    //   category_label: cat,
-    //   user_id: userId,
-    // };
-    // resultCats.push(catObj);
   });
   console.log('CATEGORIES:', resultCats);
   return resultCats;
 };
 
 // CREATE A RANDOM USER PLANTS OBJECT FOR ONE USER
-
 const writeUserPlants = (userId, x) => {
   let plants = '';
   if (x === undefined) {
@@ -99,21 +83,9 @@ const writeUserPlants = (userId, x) => {
 
   let records = 0;
   while (records < x) {
-    plants += `${'Basil'},${'Bae'},${'bright'},${1},${1},${'2020-01-20'},${'low'},${faker.random.image()},${userId}\n`;
+    plants += `${'Basil'},${'Bae'},${'bright'},${'direct'},${1},${1},${'2021-01-20'},${'low'},${faker.random.image()},${'2021-01-13'},${userId}\n`;
 
     records++;
-    // let p = {
-    //   plant_name: 'Basil',
-    //   nickname: 'Basil',
-    //   light: 'bright',
-    //   watering_times: 1,
-    //   watering_weeks: 1,
-    //   last_watered: '2021-01-30',
-    //   humidity: 'low',
-    //   photoURL: faker.random.image(),
-    //   user_id: userId,
-    // };
-    // plants.push(plantObj);
   }
   console.log('PLANTS:', plants);
   return plants;

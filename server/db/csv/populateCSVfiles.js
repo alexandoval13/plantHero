@@ -68,7 +68,7 @@ deleteFileIfExists(plantsCSVDest);
 const plantsCSV = fs.createWriteStream(plantsCSVDest);
 
 var plantsHeader =
-  'plant_name,nickname,light,watering_times,watering_weeks,last_watered,humidity,photoURL,user_id\n';
+  'plant_name,nickname,light,exposure,watering_times,watering_weeks,last_watered,humidity,photoURL,added,user_id\n';
 writeCSVHeader(plantsCSV, plantsHeader, () => {
   plantsCSV.end();
 });

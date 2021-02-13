@@ -1,42 +1,67 @@
 category_value,category_label,user_id
-air-plant,Air plant,1
-herb,Herb,2
-air-plant,Air plant,2
-flowering,Flowering,2
+tree,Tree,1
+herb,Herb,1
+chill-af,Chill AF,1
+indoor,Indoor,1
+tropical,Tropical,1
+tropical,Tropical,2
+chill-af,Chill AF,2
 variegated,Variegated,2
-variegated,Variegated,3
-chill-af,Chill AF,4
-herb,Herb,4
-succulent,Succulent,5
-outdoor,Outdoor,5
-tree,Tree,6
-high-maintenance,High-Maintenance,6
-air-plant,Air plant,6
-outdoor,Outdoor,6
-flowering,Flowering,6
-indoor,Indoor,6
-chill-af,Chill AF,7
-flowering,Flowering,7
-herb,Herb,7
-outdoor,Outdoor,7
+indoor,Indoor,2
+high-maintenance,High-Maintenance,2
+herb,Herb,2
+succulent,Succulent,2
+high-maintenance,High-Maintenance,3
+succulent,Succulent,3
+tropical,Tropical,3
+outdoor,Outdoor,3
+herb,Herb,3
+chill-af,Chill AF,3
+outdoor,Outdoor,4
+tropical,Tropical,4
+air-plant,Air plant,4
+indoor,Indoor,4
+variegated,Variegated,5
+air-plant,Air plant,5
+high-maintenance,High-Maintenance,5
+herb,Herb,5
+tropical,Tropical,5
+tropical,Tropical,6
+tropical,Tropical,7
+succulent,Succulent,7
 tree,Tree,7
-variegated,Variegated,7
+herb,Herb,7
+indoor,Indoor,7
 tropical,Tropical,8
-chill-af,Chill AF,8
-indoor,Indoor,8
+flowering,Flowering,8
+variegated,Variegated,8
+air-plant,Air plant,8
 high-maintenance,High-Maintenance,8
-air-plant,Air plant,9
-tropical,Tropical,9
-variegated,Variegated,9
+succulent,Succulent,8
+herb,Herb,8
+tree,Tree,8
+outdoor,Outdoor,8
 succulent,Succulent,9
-indoor,Indoor,9
+flowering,Flowering,9
+outdoor,Outdoor,9
+herb,Herb,9
 tree,Tree,9
-chill-af,Chill AF,9
+variegated,Variegated,9
+chill-af,Chill AF,10
+air-plant,Air plant,10
+tropical,Tropical,10
 indoor,Indoor,10
+succulent,Succulent,10
+outdoor,Outdoor,10
+flowering,Flowering,10
+herb,Herb,10
+chill-af,Chill AF,11
 high-maintenance,High-Maintenance,11
-high-maintenance,High-Maintenance,12
-succulent,Succulent,13
-indoor,Indoor,13
-tree,Tree,13
+indoor,Indoor,11
+succulent,Succulent,12
+tropical,Tropical,12
+tree,Tree,12
+variegated,Variegated,12
 chill-af,Chill AF,13
-air-plant,Air plant,13
+high-maintenance,High-Maintenance,13
+tropical,Tropical,13
