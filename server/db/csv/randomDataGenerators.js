@@ -83,7 +83,7 @@ const writeUserPlants = (userId, x) => {
 
   let records = 0;
   while (records < x) {
-    plants += `${'Basil'},${'Bae'},${'bright'},${'direct'},${1},${1},${'2021-01-20'},${'low'},${faker.random.image()},${'2021-01-13'},${userId}\n`;
+    plants += `${'Basil'},${'Bae'},${'bright'},${'direct'},${1},${7},${'2021-01-20'},${'low'},${faker.random.image()},${'2021-01-13'},${userId}\n`;
 
     records++;
   }
