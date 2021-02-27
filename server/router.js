@@ -32,4 +32,8 @@ app.get('/categories-data/:id', (req, res) => {
   controller.getCategoriesData(req.params.id, res);
 });
 
+app.post('/plant-data/:id', (req, res) => {
+  controller.addPlantData(req.body, res);
+});
+
 module.exports = app;

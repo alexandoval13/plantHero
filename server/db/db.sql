@@ -28,7 +28,7 @@ CREATE TABLE IF NOT EXISTS userplants (
   watering_days INT NOT NULL,
   last_watered DATE NOT NULL,
   humidity VARCHAR(10),
-  photoURL VARCHAR,
+  photourl VARCHAR,
   added DATE NOT NULL,
   user_id INT NOT NULL REFERENCES users(id)
 );

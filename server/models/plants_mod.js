@@ -1,11 +1,5 @@
 const db = require('../db/postgres.js').pool;
 
-// const testModel = (cb) => {
-//   console.log('model tested');
-
-//   db.Pool.query(`SELECT * FROM users`, cb)
-
-// }
 const getUser = (id, cb) => {
   console.log('getting user in mod', id);
   db.query(`SELECT * FROM users WHERE id = ${id}`, (err, res) => {
@@ -22,7 +16,6 @@ const getUser = (id, cb) => {
 
 const getPlants = (id, cb) => {
   db.query(`SELECT * FROM userplants WHERE user_id = ${id}`, (err, res) => {
-    console.log('in pool blocok...');
     if (err) {
       cb(err);
     } else {
@@ -41,9 +34,32 @@ const getCategories = (id, cb) => {
   });
 };
 
+const addPlant = (plant, cb) => {
+  let columns = '';
+  let values = '';
+  for (var key in plant) {
+    columns.length ? (columns += `,${key}`) : (columns += key);
+    values.length ? (values += `,${plant[key]}`) : (values += plant[key]);
+  }
+
+  let query = `
+    INSERT INTO userplants(plant_name,nickname,light,exposure,watering_times,watering_days,last_watered,humidity,photourl,added,user_id) VALUES ('${plant['plant_name']}','${plant.nickname}','${plant.light}','${plant.exposure}',${plant['watering_times']},${plant['watering_days']},'${plant['last_watered']}','${plant.humidity}','${plant.photourl}','${plant.added}',${plant['user_id']});
+  `;
+
+  db.query(query, (err, res) => {
+    if (err) {
+      console.log('err');
+      cb(err);
+    } else {
+      console.log('success');
+      cb(res);
+    }
+  });
+};
+
 module.exports = {
-  // testModel,
   getUser,
   getPlants,
   getCategories,
+  addPlant,
 };

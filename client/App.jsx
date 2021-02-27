@@ -1,7 +1,8 @@
 import React, { useState, useEffect, useRef } from 'react';
 import ReactDOM from 'react-dom';
 
-import { getUser, getCategories, getPlants } from './api_helpers/helpers.js';
+import { getUser, getPlants, getCategories } from './api_helpers/read.js';
+import { addPlant } from './api_helpers/write.js';
 
 import Form from './components/Form.jsx';
 import PlantList from './components/PlantList.jsx';
@@ -12,46 +13,52 @@ import Confirmation from './components/Confirmation.jsx';
 import QuickDisplay from './components/QuickDisplay.jsx';
 
 import styles from './css/App.css';
-
-const plants = require('./dummy_plant_data.js');
-const categoryList = require('./category_presets.js');
-
 import moment from 'moment';
+
+var plants = []; // require('./dummy_plant_data.js');
+var categoryList = []; // require('./category_presets.js');
 const today = moment().format().split('T')[0];
-console.log(today, typeof today);
+const plantImg =
+  'https://www.pngkey.com/png/detail/167-1679820_cartoon-characters-animals-and-plants-plants-in-the.png';
 
 const App = () => {
-  const [plantsData, setData] = useState(plants);
-  const [categories, setCategories] = useState(categoryList);
+  // const [status, setStatus] = useState(0);
+  const [plantsData, setData] = useState([]);
+  const [categories, setCategories] = useState([]);
   const [date, setDate] = useState(today);
-
   const [selectedPlant, setPlant] = useState(null);
   const [newPlant, setNewPlant] = useState(null);
   const [filter, setFilter] = useState(null);
-
   const [content, setContent] = useState('PlantList');
   const [quickDisplay, setQuickDisplay] = useState(null);
   const [image, setImage] = useState('');
-
   const [loading, setLoading] = useState(false);
+  const [user, setUser] = useState(null);
 
   useEffect(() => {
-    // const today = new Date().toLocaleString('en-US', { timeZone: 'America/Los_Angeles' });
-    // console.log(today);
-
-    // axios.get('/plant')
-    //   .then(res => {
-    //     // setData(res.data) // to reset the state of that hook
-    //     console.log('successful request');
-    //   })
-    //   .catch(err => {
-    //     console.log('error')
-    //   })
     var pathArr = window.location.pathname.split('/');
-    var id = pathArr[pathArr.length - 1];
+    var id = pathArr[pathArr.length - 1] || 1;
 
-    console.log('path:', window.location.pathname, id);
+    getUser(id).then((user) => {
+      console.log('USER INFO:', user);
+      setUser(user);
+    });
+    getPlants(id).then((plants) => {
+      setData(plants);
+    });
+
+    getCategories(id).then((cats) => {
+      setCategories(cats);
+    });
   }, []);
+
+  const convertToDays = (value) => {
+    if (value === 'daily') return 1;
+    if (value === 'weekly') return 7;
+    if (value === 'bi-weekly') return 14;
+    if (value === 'monthly') return 28;
+    console.log('failed');
+  };
 
   const handleSubmitPlant = (e) => {
     e.preventDefault();
@@ -64,45 +71,42 @@ const App = () => {
       return selectedCategories;
     };
 
-    var id = plantsData.length + 1;
     var name = e.target['plant-name'].value;
     var nickname = e.target['nickname'].value;
-    var lightLevel = e.target['light-level'].value;
-    var lightSource = e.target['light-source'].value;
-    var light =
-      lightLevel && lightSource
-        ? lightLevel + ', ' + lightSource
-        : lightLevel || lightSource
-        ? lightLevel || lightSource
-        : null;
-    var wateringCycleAmount =
+    var light = e.target['light-level'].value;
+    var exposure = e.target['light-source'].value;
+    var wateringTimes =
       e.target['watering-cycle-amount'].value > 0
         ? e.target['watering-cycle-amount'].value
         : null;
-    var wateringCyclePeriod = e.target['watering-cycle-period'].value;
-    var wateringCycle = [Number(wateringCycleAmount), wateringCyclePeriod];
-    console.log('watering cycle:', wateringCycle);
+    var wateringDays = convertToDays(e.target['watering-cycle-period'].value);
     var humidity = e.target['humidity'].value;
     var categories = getCategories(e.target['categories']);
     var photoURL = image;
 
-    if (id && name && wateringCycleAmount && wateringCyclePeriod) {
+    if (name && wateringTimes && wateringDays) {
+      console.log(user, user.id);
       const newPlantObj = {
-        id: id,
-        name: name,
+        plant_name: name,
         nickname: nickname,
-        light: [light],
-        watering: wateringCycle,
+        light: light,
+        exposure: exposure,
+        watering_times: Number(wateringTimes),
+        watering_days: wateringDays,
+        last_watered: moment().format(),
         humidity: humidity,
-        categories: categories,
-        photoURL: photoURL,
-        lastWatered: today,
+        photourl: photoURL,
+        added: moment().format(),
+        user_id: user[0].id,
       };
+
       var newDataSet = plantsData.concat([newPlantObj]);
       setImage('');
       setData(newDataSet);
       setNewPlant(newPlantObj);
       setContent('Confirmation');
+
+      addPlant(newPlantObj);
     } else {
       alert('Valid Name and Watering Cycle are required.');
     }
@@ -137,24 +141,25 @@ const App = () => {
     }
   };
 
+  // NEEDS REFACTORING TO UPDATE DATABASE
   const handleWater = (e) => {
     e.preventDefault();
 
-    console.log('handling water', e.target.name);
-    var plant = e.target.name;
+    // console.log('handling water', e.target.name);
+    // var plant = e.target.name;
 
-    var newDataSet = plantsData;
+    // var newDataSet = plantsData;
 
-    for (var i = 0; i < plantsData.length; i++) {
-      console.log('ID', plantsData[i].id);
-      if (plantsData[i].id === Number(plant)) {
-        plantsData[i].lastWatered = today;
-        console.log('date changed to ', today);
-        setData(newDataSet);
-        console.log(plantsData);
-        return;
-      }
-    }
+    // for (var i = 0; i < plantsData.length; i++) {
+    //   console.log('ID', plantsData[i].id);
+    //   if (plantsData[i].id === Number(plant)) {
+    //     plantsData[i].lastWatered = today;
+    //     console.log('date changed to ', today);
+    //     setData(newDataSet);
+    //     console.log(plantsData);
+    //     return;
+    //   }
+    // }
   };
 
   return (
@@ -180,9 +185,11 @@ const App = () => {
             handleWater={handleWater}
             plants={plantsData}
             filter={filter}
+            categories={categories}
             setPlant={setPlant}
             setContent={setContent}
             handleMouse={handleMouse}
+            plantImg={plantImg}
           />
         ) : null}
 
@@ -190,6 +197,7 @@ const App = () => {
           selectedPlant={selectedPlant}
           setPlant={setPlant}
           content={content}
+          plantImg={plantImg}
         />
 
         {content === 'Form' ? (

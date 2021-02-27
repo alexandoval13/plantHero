@@ -47,23 +47,18 @@ npm install
 ```
 ## Postgres
 
-To create and connect to the Plant Hero database, run
-
-```sh
-npm run db
-```
-
 To populate the database with dummy data generated through a CSV file
 
 ```sh
 npm run populateCSV
 ```
 
-then
+To create the Plant Hero database and seed with CSV file data
 
 ```sh
 npm run db
 ```
+
 
 <!-- ## CRUD API
 
