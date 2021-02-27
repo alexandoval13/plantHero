@@ -8,7 +8,6 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(express.urlencoded({ extended: true }));
 
-// app.get('/test', controller.testController);
 app.get('/:id', (req, res) => {
   console.log(req.params['id']);
   if (req.params['id'] >= 1 && req.params['id'] <= 13) {
@@ -34,6 +33,12 @@ app.get('/categories-data/:id', (req, res) => {
 
 app.post('/plant-data/:id', (req, res) => {
   controller.addPlantData(req.body, res);
+});
+
+app.put('/plant-water', (req, res) => {
+  // controller.addPlantData
+  // console.log(req.body);
+  controller.updateWaterDate(req.body, res);
 });
 
 module.exports = app;

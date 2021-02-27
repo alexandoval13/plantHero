@@ -43,7 +43,7 @@ const addPlant = (plant, cb) => {
   }
 
   let query = `
-    INSERT INTO userplants(plant_name,nickname,light,exposure,watering_times,watering_days,last_watered,humidity,photourl,added,user_id) VALUES ('${plant['plant_name']}','${plant.nickname}','${plant.light}','${plant.exposure}',${plant['watering_times']},${plant['watering_days']},'${plant['last_watered']}','${plant.humidity}','${plant.photourl}','${plant.added}',${plant['user_id']});
+  INSERT INTO userplants(plant_name,nickname,light,exposure,watering_times,watering_days,last_watered,humidity,photourl,added,user_id) VALUES ('${plant['plant_name']}','${plant.nickname}','${plant.light}','${plant.exposure}',${plant['watering_times']},${plant['watering_days']},'${plant['last_watered']}','${plant.humidity}','${plant.photourl}','${plant.added}',${plant['user_id']});
   `;
 
   db.query(query, (err, res) => {
@@ -57,9 +57,27 @@ const addPlant = (plant, cb) => {
   });
 };
 
+const updateWater = (info, cb) => {
+  db.query(
+    `UPDATE userplants
+    SET last_watered = '${info.date}'
+    WHERE id = ${info.id}`,
+    (err, res) => {
+      if (err) {
+        console.log(err);
+        cb(err);
+      } else {
+        console.log(res);
+        cb(res);
+      }
+    }
+  );
+};
+
 module.exports = {
   getUser,
   getPlants,
   getCategories,
   addPlant,
+  updateWater,
 };

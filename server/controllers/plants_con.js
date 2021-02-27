@@ -24,9 +24,16 @@ const addPlantData = (plant, res) => {
   });
 };
 
+const updateWaterDate = (info, res) => {
+  data.updateWater(info, (data) => {
+    res.send(data);
+  });
+};
+
 module.exports = {
   getUserData,
   getPlantData,
   getCategoriesData,
   addPlantData,
+  updateWaterDate,
 };

@@ -1,8 +1,8 @@
 import React, { useState, useEffect, useRef } from 'react';
 import ReactDOM from 'react-dom';
-
 import { getUser, getPlants, getCategories } from './api_helpers/read.js';
-import { addPlant } from './api_helpers/write.js';
+import { addPlant, updateWaterDate } from './api_helpers/write.js';
+import { plantImg } from './assets/plantImg.js';
 
 import Form from './components/Form.jsx';
 import PlantList from './components/PlantList.jsx';
@@ -15,11 +15,7 @@ import QuickDisplay from './components/QuickDisplay.jsx';
 import styles from './css/App.css';
 import moment from 'moment';
 
-var plants = []; // require('./dummy_plant_data.js');
-var categoryList = []; // require('./category_presets.js');
 const today = moment().format().split('T')[0];
-const plantImg =
-  'https://www.pngkey.com/png/detail/167-1679820_cartoon-characters-animals-and-plants-plants-in-the.png';
 
 const App = () => {
   // const [status, setStatus] = useState(0);
@@ -144,22 +140,18 @@ const App = () => {
   // NEEDS REFACTORING TO UPDATE DATABASE
   const handleWater = (e) => {
     e.preventDefault();
+    var plantId = e.target.name;
+    console.log('plant id:', plantId, '|| todays date:,', today);
 
-    // console.log('handling water', e.target.name);
-    // var plant = e.target.name;
-
-    // var newDataSet = plantsData;
-
-    // for (var i = 0; i < plantsData.length; i++) {
-    //   console.log('ID', plantsData[i].id);
-    //   if (plantsData[i].id === Number(plant)) {
-    //     plantsData[i].lastWatered = today;
-    //     console.log('date changed to ', today);
-    //     setData(newDataSet);
-    //     console.log(plantsData);
-    //     return;
-    //   }
-    // }
+    // invoke update last watered date via API
+    updateWaterDate({ id: plantId, date: today }).then((result) => {
+      var pathArr = window.location.pathname.split('/');
+      var id = pathArr[pathArr.length - 1] || 1;
+      getPlants(id).then((plants) => {
+        setData(plants);
+        console.log(plantsData);
+      });
+    });
   };
 
   return (

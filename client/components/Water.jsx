@@ -1,26 +1,25 @@
 import React from 'react';
+import moment from 'moment';
 import styles from './css/Water.css';
 
 const Water = (props) => {
   const plants = props.plants;
-
-  const joinDate = (date) => {
-    let lastArr = date.split('T')[0].split('-');
-    return lastArr[0] + lastArr[1] + lastArr[2];
-  };
 
   const formatDisplayDate = (date) => {
     let d = date.split('T')[0].split('-');
     return `${d[1]}/${d[2]}/${d[0]}`;
   };
 
+  const getDaysDiff = (today, lastDate) => {
+    let lastArr = moment(lastDate.split('T')[0].split('-'));
+    let todayArr = moment(today.split('T')[0].split('-'));
+    return todayArr.diff(lastArr, 'days');
+  };
+
   const needWater = (p) => {
-    var num = p['watering_times'];
-    var period = p['watering_days'] / 7;
-    var days = Math.floor(period / num);
-    var today = joinDate(props.date);
-    var last = joinDate(p['last_watered']);
-    return today - last >= days ? true : false;
+    var days = Math.floor(p['watering_days'] / p['watering_times']);
+    var difference = getDaysDiff(props.date, p['last_watered']);
+    return difference >= days ? true : false;
   };
 
   return (
