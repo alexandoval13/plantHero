@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import styles from './css/PlantList.css';
+import PlantListBar from './PlantListBar.jsx';
 import Plant from './Plant.jsx';
 import Water from './Water.jsx';
 
@@ -8,26 +9,7 @@ const PlantList = (props) => {
 
   return (
     <div className={styles['plant-list-comp']}>
-      <div className={styles['mode-bar']}>
-        <div
-          className={styles['mode-select']}
-          name="viewMode"
-          onClick={() => {
-            setMode('ViewMode');
-          }}
-        >
-          View Mode
-        </div>
-        <div
-          className={styles['mode-select']}
-          name="waterMode"
-          onClick={() => {
-            setMode('WaterMode');
-          }}
-        >
-          Water Mode
-        </div>
-      </div>
+      <PlantListBar setPlant={props.setPlant} setMode={setMode} />
       <div className={styles['plant-box']}>
         {mode === 'ViewMode' ? (
           <Plant

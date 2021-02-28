@@ -36,9 +36,11 @@ app.post('/plant-data/:id', (req, res) => {
 });
 
 app.put('/plant-water', (req, res) => {
-  // controller.addPlantData
-  // console.log(req.body);
   controller.updateWaterDate(req.body, res);
+});
+
+app.put('/plant-category', (req, res) => {
+  controller.addToCategory(req.body, res);
 });
 
 module.exports = app;

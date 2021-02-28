@@ -1,11 +1,4 @@
-.plant-list-comp {
-  margin: 0 auto;
-  max-width: 800px;
-
-  /* border: 1px solid gold; */
-}
-
-/* MODE SELECT BAR
+/* MODE SELECT BAR */
 .mode-bar {
   display: flex;
   justify-content: flex-start;
@@ -21,10 +14,4 @@
 
 .mode-select:hover {
   cursor: pointer;
-} */
-
-/* PLANT BOX */
-.plant-box {
-  max-width: 100%;
-  /* border: 1px solid black; */
 }

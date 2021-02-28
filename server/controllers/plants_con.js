@@ -30,10 +30,18 @@ const updateWaterDate = (info, res) => {
   });
 };
 
+const addToCategory = (info, res) => {
+  data.addIdToCategory(info, (data) => {
+    console.log(data);
+    res.send(data);
+  });
+};
+
 module.exports = {
   getUserData,
   getPlantData,
   getCategoriesData,
   addPlantData,
   updateWaterDate,
+  addToCategory,
 };

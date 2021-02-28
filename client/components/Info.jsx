@@ -3,7 +3,6 @@ import styles from './css/Info.css';
 
 const Info = (props) => {
   const p = props.selectedPlant;
-
   const light = (x) => {
     x.light = null;
     // x.exposure = null;
@@ -18,8 +17,11 @@ const Info = (props) => {
   const water = (x) => {
     let times = x['watering_times'];
     let days = x['watering_days'];
-
-    if (times == 1 && days == 7) {
+    if (days === 1 && times === 1) {
+      return `Needs water once a day.`;
+    } else if (days === 1) {
+      return `Needs water ${times} times a day.`;
+    } else if (times == 1 && days == 7) {
       return `Needs water once a week.`;
     } else if (times == 1) {
       return `Needs water once every ${days / 7} weeks.`;

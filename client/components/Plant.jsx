@@ -3,19 +3,16 @@ import styles from './css/Plant.css';
 
 const Plant = (props) => {
   const plants = props.plants;
-  console.log(plants);
+  const filter = props.filter;
 
   return (
     <div className={styles['plants-container']}>
-      {props.filter
+      {filter
         ? plants.map((plant) => {
-            console.log('FILTER:', props.filter);
             if (
-              props.filter.plants &&
-              props.filter.plants.indexOf(plant.id) >= 0
+              filter.plants &&
+              props.filter.plants.indexOf(String(plant.id)) >= 0
             ) {
-              // refactor to work with categories plants array: categories.plants.indexOf(plant.id) >= 0... will need to pass down category and its plants array
-
               return (
                 <div
                   className={styles['planter']}

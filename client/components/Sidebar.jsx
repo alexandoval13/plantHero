@@ -26,13 +26,12 @@ const Sidebar = (props) => {
         Add a New Plant
       </button>
       <div className={styles['category-sct']}>
-        <h4 className={styles['group-txt']}>Group By...</h4>
+        <h4 className={styles['group-txt']}>Group By</h4>
         {props.categories.map((category) => {
           return (
             <div
               className={styles['category']}
               onClick={() => {
-                console.log('clicked', category);
                 props.setContent('PlantList');
                 props.setFilter(category);
                 props.setPlant(null);

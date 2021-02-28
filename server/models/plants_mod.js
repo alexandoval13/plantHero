@@ -43,7 +43,7 @@ const addPlant = (plant, cb) => {
   }
 
   let query = `
-  INSERT INTO userplants(plant_name,nickname,light,exposure,watering_times,watering_days,last_watered,humidity,photourl,added,user_id) VALUES ('${plant['plant_name']}','${plant.nickname}','${plant.light}','${plant.exposure}',${plant['watering_times']},${plant['watering_days']},'${plant['last_watered']}','${plant.humidity}','${plant.photourl}','${plant.added}',${plant['user_id']});
+  INSERT INTO userplants(plant_name,nickname,light,exposure,watering_times,watering_days,last_watered,humidity,photourl,added,user_id) VALUES ('${plant['plant_name']}','${plant.nickname}','${plant.light}','${plant.exposure}',${plant['watering_times']},${plant['watering_days']},'${plant['last_watered']}','${plant.humidity}','${plant.photourl}','${plant.added}',${plant['user_id']}) RETURNING id;
   `;
 
   db.query(query, (err, res) => {
@@ -51,8 +51,8 @@ const addPlant = (plant, cb) => {
       console.log('err');
       cb(err);
     } else {
-      console.log('success');
-      cb(res);
+      console.log('success:', res);
+      cb(res.rows[0]);
     }
   });
 };
@@ -74,10 +74,41 @@ const updateWater = (info, cb) => {
   );
 };
 
+const addIdToCategory = (info, cb) => {
+  console.log(`adding ${info.plantId} to ${info.categories}`);
+  let plantId = info.plantId;
+  let userId = info.userId;
+
+  let result = [];
+  info.categories.forEach((category) => {
+    console.log(
+      `=================CATEGORY IN QUESTION: ${category}===============`
+    );
+    db.query(
+      `UPDATE usercategories
+      SET plants = plants || '{${plantId}}'
+      WHERE user_id = ${userId} AND category_value = '${category}'`,
+      (err, res) => {
+        if (err) {
+          console.log(err);
+          cb(err);
+        } else {
+          // console.log(res);
+          result.push(res);
+          if (result.length === info.categories.length) {
+            cb(result);
+          }
+        }
+      }
+    );
+  });
+};
+
 module.exports = {
   getUser,
   getPlants,
   getCategories,
   addPlant,
   updateWater,
+  addIdToCategory,
 };

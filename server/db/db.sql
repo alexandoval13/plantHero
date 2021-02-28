@@ -1,8 +1,6 @@
 -- create a database
 DROP DATABASE IF EXISTS planthero;
-
 CREATE DATABASE planthero;
-
 \c planthero;
 
 CREATE TABLE IF NOT EXISTS users (
@@ -16,7 +14,6 @@ COPY users (user_id,user_pw,full_name)
 FROM '/Users/alexandra/Hack-Reactor/SEI-hrr49/MVP/Rootie/server/db/csv/usersCSV.csv'
 DELIMITER ','
 CSV HEADER;
-
 
 CREATE TABLE IF NOT EXISTS userplants (
   id SERIAL PRIMARY KEY,
@@ -39,8 +36,6 @@ DELIMITER ','
 CSV HEADER;
 
 CREATE INDEX ON userplants(user_id);
-
-
 
 CREATE TABLE IF NOT EXISTS usercategories (
   id SERIAL PRIMARY KEY,

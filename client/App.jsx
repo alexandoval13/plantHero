@@ -1,7 +1,11 @@
 import React, { useState, useEffect, useRef } from 'react';
 import ReactDOM from 'react-dom';
 import { getUser, getPlants, getCategories } from './api_helpers/read.js';
-import { addPlant, updateWaterDate } from './api_helpers/write.js';
+import {
+  addPlant,
+  updateWaterDate,
+  addToCategory,
+} from './api_helpers/write.js';
 import { plantImg } from './assets/plantImg.js';
 
 import Form from './components/Form.jsx';
@@ -36,7 +40,6 @@ const App = () => {
     var id = pathArr[pathArr.length - 1] || 1;
 
     getUser(id).then((user) => {
-      console.log('USER INFO:', user);
       setUser(user);
     });
     getPlants(id).then((plants) => {
@@ -53,12 +56,11 @@ const App = () => {
     if (value === 'weekly') return 7;
     if (value === 'bi-weekly') return 14;
     if (value === 'monthly') return 28;
-    console.log('failed');
+    console.log('failed to convert to days');
   };
 
   const handleSubmitPlant = (e) => {
     e.preventDefault();
-
     var getCategories = (input) => {
       var selectedCategories = [];
       for (var i = 0; i < input.length; i++) {
@@ -66,7 +68,7 @@ const App = () => {
       }
       return selectedCategories;
     };
-
+    var categories = getCategories(e.target['categories']);
     var name = e.target['plant-name'].value;
     var nickname = e.target['nickname'].value;
     var light = e.target['light-level'].value;
@@ -77,11 +79,10 @@ const App = () => {
         : null;
     var wateringDays = convertToDays(e.target['watering-cycle-period'].value);
     var humidity = e.target['humidity'].value;
-    var categories = getCategories(e.target['categories']);
     var photoURL = image;
+    var userId = user[0].id;
 
     if (name && wateringTimes && wateringDays) {
-      console.log(user, user.id);
       const newPlantObj = {
         plant_name: name,
         nickname: nickname,
@@ -93,7 +94,7 @@ const App = () => {
         humidity: humidity,
         photourl: photoURL,
         added: moment().format(),
-        user_id: user[0].id,
+        user_id: userId,
       };
 
       var newDataSet = plantsData.concat([newPlantObj]);
@@ -101,8 +102,14 @@ const App = () => {
       setData(newDataSet);
       setNewPlant(newPlantObj);
       setContent('Confirmation');
-
-      addPlant(newPlantObj);
+      addPlant(newPlantObj).then((res) => {
+        let plantId = res.data.id;
+        if (categories.length > 0) {
+          addToCategory({ categories, plantId, userId }).then(() => {
+            getCategories(userId);
+          });
+        }
+      });
     } else {
       alert('Valid Name and Watering Cycle are required.');
     }
@@ -137,19 +144,14 @@ const App = () => {
     }
   };
 
-  // NEEDS REFACTORING TO UPDATE DATABASE
   const handleWater = (e) => {
     e.preventDefault();
     var plantId = e.target.name;
-    console.log('plant id:', plantId, '|| todays date:,', today);
-
-    // invoke update last watered date via API
     updateWaterDate({ id: plantId, date: today }).then((result) => {
       var pathArr = window.location.pathname.split('/');
       var id = pathArr[pathArr.length - 1] || 1;
       getPlants(id).then((plants) => {
         setData(plants);
-        console.log(plantsData);
       });
     });
   };
