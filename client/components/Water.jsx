@@ -25,8 +25,7 @@ const Water = (props) => {
   return (
     <div className={styles['plants-container']}>
       <div>
-        <h4>Psst... click if you're watering today right now.</h4>
-        <h3>Probably Need Water:</h3>
+        <h3>Check for water:</h3>
         <div className={styles['need-water']}>
           {plants.map((plant) => {
             if (needWater(plant)) {
@@ -50,9 +49,11 @@ const Water = (props) => {
                       className={styles['plant-image']}
                     />
                   </div>
-                  <text>{`Last watered: ${formatDisplayDate(
-                    plant['last_watered']
-                  )}`}</text>
+                  <div className={styles['water-info']}>
+                    <h5>{`Watered ${formatDisplayDate(
+                      plant['last_watered']
+                    )}`}</h5>
+                  </div>
                 </div>
               );
             }
@@ -82,9 +83,11 @@ const Water = (props) => {
                       className={styles['plant-image']}
                     />
                   </div>
-                  <text>{`Last watered: ${formatDisplayDate(
-                    plant['last_watered']
-                  )}`}</text>
+                  <div className={styles['water-info']}>
+                    <h5>{`Watered ${formatDisplayDate(
+                      plant['last_watered']
+                    )}`}</h5>
+                  </div>
                 </div>
               );
             }
