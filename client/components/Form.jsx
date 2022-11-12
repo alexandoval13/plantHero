@@ -132,7 +132,11 @@ const Form = (props) => {
           />
         ) : null}
 
-        <input className={styles['submit-plant-btn']} type="submit" />
+        {props.loading ? (
+          <text>Waiting for Photo</text>
+        ) : (
+          <input className={styles['submit-plant-btn']} type="submit" />
+        )}
       </form>
 
       {props.image.length > 0 ? (

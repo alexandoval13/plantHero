@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import ReactDOM from 'react-dom';
+import axios from 'axios';
 import { getUser, getPlants, getCategories } from './api_helpers/read.js';
 import {
   addPlant,
@@ -126,9 +127,11 @@ const App = () => {
       .post('https://api.cloudinary.com/v1_1/dpbieru1u/image/upload', data)
       .then((res) => {
         setImage(res.data.url);
+        setLoading(false);
       })
       .catch((err) => {
         setImage('Error');
+        setLoading(false);
       });
   };
 
@@ -202,6 +205,7 @@ const App = () => {
             setContent={setContent}
             image={image}
             categories={categories}
+            loading={loading}
           />
         ) : null}
         {content === 'Confirmation' ? (
